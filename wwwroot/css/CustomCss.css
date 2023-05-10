@@ -1,0 +1,19 @@
+﻿
+.Default-Bg-Color {
+    padding-right:100px;
+    background-color: rgba(37,158,190,1);
+}
+.Default-Text-Color { 
+    color: rgb(37,158,190);
+}
+.Circle-Button { 
+    padding:.25rem 4rem .25rem 4rem;
+    margin:0rem .5rem 0rem .5rem;
+    border-radius: 1.55rem;
+}
+.Button-Spacing{
+    padding-left:1.2rem;
+}
+.Hover-Effect:hover { 
+    border-color: rgb(37,158,190);
+}

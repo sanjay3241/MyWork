@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "_NoNavBarHeader";
+}
+@model Login
+
+<div class="container  mt-sm-5">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title Default-Text-Color text-center"> <span>MyWork </span></h5>
+                    <div class="row">
+                        <form>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Name"></label>
+                                <input type="text" class="form-control" asp-for="Name" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Email"></label>
+                                <input type="email" class="form-control" asp-for="Email" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Password"></label>
+                                <input type="password" class="form-control" asp-for="Password" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Confirm_Password"></label>
+                                <input type="password" class="form-control" asp-for="Confirm_Password" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Country"></label>
+                                <select class="form-control" asp-for="Country"> </select>
+                            </div>
+                            <div class="col-sm-12 col-lg-12 text-center mt-2 Default-Text-Color">
+                                <input type="checkbox" class="form-check-input" required>
+                                <label class="form-check-label">I agree to the term and condition of MyWork</label>
+                            </div>
+                            <div class="col-sm-12 col-lg-12 text-end">
+                                <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+    });
+
+    $("#btnSubmit").click(function (e) {
+        $("#btnSubmit").text("Okay");
+        e.preventDefault();
+    })
+</script>
