@@ -27,42 +27,105 @@ namespace MyWork.Controllers
         {
             return View();
         }
+        public IActionResult VerificationPage()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult RegisterFreelancer(Login model)
+        public IActionResult RegisterFreelancer(Login model)
+        {
+            using (IDbConnection con = new SqlConnection(connectionString))
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open(); 
+
+                try
+                {
+                    con.Execute(@"INSERT INTO [dbo].[User](FullName,Email,Password,Username,Token,Account_Type, IsActive,Registered_Date) Values(@FullName,@Email,
+@Password,@Username,@Token,@Account_Type, @IsActive,@Registered_Date)", new
+                    {
+                        @FullName = model.Name,
+                        @Email = model.Email,
+                        @Password = model.Password,
+                        @Username = model.Name,
+                        @Token = model.Token,
+                        @Account_Type = model.Account_Type,
+                        @IsActive = 0,
+                        @Registered_Date = DateTime.Now
+                    });
+                    if (CommonFunction.SendMail(model.Email, "Registration Code", model.Token))
+                    {
+                        return Json(new
+                        {
+                            msg = "Email Sent Successfully",
+                            success = true
+                        });
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            msg = "Error ! Sending Email",
+                            success = false
+                        });
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    return Json(new
+                    {
+                        msg = Ex.Message,
+                        success = false
+                    });
+                }; 
+            } 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EmailConfirmation(Verification model)
         {
             using (IDbConnection con = new SqlConnection(connectionString))
             {
                 if (con.State == ConnectionState.Closed)
                     con.Open();
 
-                con.Execute(@"INSERT INTO [dbo].[User](FullName,Email,Password,Username,Token, IsActive,Registered_Date) Values(@FullName,@Email,
-@Password,@Username,@Token, @IsActive,@Registered_Date)", new
+                try
                 {
-                    @FullName=model.Name,
-                    @Email=model.Email,
-                    @Password=model.Password,
-                    @Username=model.Name,
-                    @Token=model.Token,
-                    @IsActive=0,
-                    @Registered_Date=DateTime.Now
-                });
+                    if (con.Query<string>("Select Token From dbo.[User] Where Email=@Email", new { @Email = model.Email }).FirstOrDefault() == model.Code)
+                    {
+                        con.Execute(@"Update dbo.[User] set IsActive=1 Where Email=@Email", new { @Email = model.Email });
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            msg = "Enter Valid Token",
+                            success = false
+                        });
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    return Json(new
+                    {
+                        msg = Ex.Message,
+                        success = false
+                    });
+                }; 
             }
 
             return Json(new
             {
-                msg = "Registerd Successfully",
+                msg = "Email Verified Successfully",
                 success = true
             });
         }
-
-        public JsonResult Login()
+        public IActionResult Login()
         {
-            return Json(new
-            {
-                Name = ""
-            });
+            return View();
         }
     }
 }

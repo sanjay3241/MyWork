@@ -26,7 +26,10 @@ public class Login
     public string Name { get; set; }
     [Required]
     [Display(Name = "Country* : ")]
-    public string Country { get; set; }
+    public string Country { get; set; } 
+    [Required]
+    [Display(Name = "Account_Type : ")]
+    public string Account_Type { get; set; }
     public string Token { get; set; }
 }
 

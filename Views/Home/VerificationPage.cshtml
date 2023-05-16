@@ -1,0 +1,67 @@
+﻿@{
+    Layout = "_NoNavBarHeader";
+}
+@using Microsoft.AspNetCore.Http.Extensions;
+@model Verification
+
+<div class="container">
+    <div class="row mt-5 mx-auto">
+        <div class="col-sm-4 col-lg-4">
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4 Default-Text-Color">Enter Verification Code</h5>
+                    <div class="row">
+                        <form id="VerificationPage">
+                            @Html.AntiForgeryToken()
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Email"> </label>
+                                @if (Context.Request.Query.TryGetValue("email", out var email))
+                                {
+                                    <input type="text" class="form-control" asp-for="Email" value="@email" readonly>
+                                }
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Code"> </label>
+                                <input type="text" class="form-control" asp-for="Code">
+                            </div>
+                            <div class="col-sm-12 col-lg-12 text-end mt-4">
+                                <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+    });
+
+    $('#VerificationPage').submit(function (e) {
+        $.ajax({
+            url: 'EmailConfirmation',
+            type: 'Post',
+            data: $(this).serialize()
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    window.location.href = '/Home/Login';
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+        e.preventDefault();
+        return false;
+    });
+</script>

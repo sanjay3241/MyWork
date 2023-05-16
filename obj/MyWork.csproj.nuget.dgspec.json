@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\_SanjayMahato\\_Working\\msanjay19\\MyWork\\MyWork.csproj": {}
+    "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\MyWork.csproj": {}
   },
   "projects": {
-    "D:\\_SanjayMahato\\_Working\\msanjay19\\MyWork\\MyWork.csproj": {
+    "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\MyWork.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_SanjayMahato\\_Working\\msanjay19\\MyWork\\MyWork.csproj",
+        "projectUniqueName": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\MyWork.csproj",
         "projectName": "MyWork",
-        "projectPath": "D:\\_SanjayMahato\\_Working\\msanjay19\\MyWork\\MyWork.csproj",
+        "projectPath": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\MyWork.csproj",
         "packagesPath": "C:\\Users\\msanj\\.nuget\\packages\\",
-        "outputPath": "D:\\_SanjayMahato\\_Working\\msanjay19\\MyWork\\obj\\",
+        "outputPath": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

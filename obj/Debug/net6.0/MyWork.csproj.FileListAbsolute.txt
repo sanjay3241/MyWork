@@ -35,3 +35,40 @@ D:\_SanjayMahato\_Working\msanjay19\MyWork\bin\Debug\net6.0\runtimes\win-x86\nat
 D:\_SanjayMahato\_Working\msanjay19\MyWork\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\_SanjayMahato\_Working\msanjay19\MyWork\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\_SanjayMahato\_Working\msanjay19\MyWork\bin\Debug\net6.0\Dapper.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\appsettings.Development.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\appsettings.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.staticwebassets.runtime.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.exe
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.deps.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.runtimeconfig.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\MyWork.pdb
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\Dapper.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\System.Data.SqlClient.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.csproj.AssemblyReference.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.GeneratedMSBuildEditorConfig.editorconfig
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.AssemblyInfoInputs.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.AssemblyInfo.cs
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.csproj.CoreCompileInputs.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.MvcApplicationPartsAssemblyInfo.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.RazorAssemblyInfo.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.RazorAssemblyInfo.cs
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\staticwebassets.build.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\staticwebassets.development.json
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\scopedcss\bundle\MyWork.styles.css
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\scopedcss\projectbundle\MyWork.bundle.scp.css
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.csproj.CopyComplete
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\refint\MyWork.dll
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.pdb
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\MyWork.genruntimeconfig.cache
+D:\_SanjayMahato\The British College\4th Year\semester 2\Production Project\Project\MyWork\obj\Debug\net6.0\ref\MyWork.dll
