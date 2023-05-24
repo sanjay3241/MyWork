@@ -2,12 +2,12 @@
 using System.Net.Mail;
 using System.Net;
 
-namespace MyWork.Controllers
+namespace MyWork.Support
 {
-    public class CommonFunction : Controller
-    {
-        public static bool SendMail(string toEmail,string Header,string Subject)
-        {  
+    public class CommonFunction 
+    { 
+        public static bool SendMail(string toEmail, string Header, string Subject)
+        {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("msanjay6013@gmail.com");
             mail.To.Add(new MailAddress(toEmail));
@@ -29,5 +29,6 @@ namespace MyWork.Controllers
                 return false;
             }
         }
+
     }
 }

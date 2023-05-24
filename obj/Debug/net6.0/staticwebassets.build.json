@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EEa13TJP8qWfikfIJ0L3GRk7COg+DHNMCMWBNBjg2VY=",
+  "Hash": "MMFO6cS7Tazw+biGabLMF034s+IqYrjM1nzz7vZ/wjU=",
   "Source": "MyWork",
   "BasePath": "_content/MyWork",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\Images\\profile-image.jpg",
+      "SourceId": "MyWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\",
+      "BasePath": "_content/MyWork",
+      "RelativePath": "Images/profile-image.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\profile-image.jpg"
     },
     {
       "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\js\\site.js",

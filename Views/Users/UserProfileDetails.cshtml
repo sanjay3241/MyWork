@@ -1,0 +1,284 @@
+﻿@{
+    Layout = "_UserNavBar";
+}
+@using Microsoft.AspNetCore.Http.Extensions;
+@model FullDetails
+
+<div class="container">
+    <div class="row mt-4 mx-auto h-auto">
+        <div class="col-sm-10 col-lg-10 mx-auto mt-4"> 
+            <form id="userFullDetails">
+
+
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 d-flex justify-content-center mt-5">
+                        <div class="image-container">
+                            <img src="/images/profile-image.jpg" class=" rounded-circle rounded-circleMainProfile" alt="Profile Picture" id="profileImg">
+                            <div class="image-text fw-bold">
+                                Upoad Picture
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mx-auto mt-4">
+                        <div class="card mt-5">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 Default-Text-Color">Personal Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="FirstName"></label>
+                                        <input type="text" class="form-control" asp-for="FirstName" required>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="LastName"></label>
+                                        <input type="text" class="form-control" asp-for="LastName" required>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Username"></label>
+                                        <input type="text" class="form-control" asp-for="Username" required>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Email"></label>
+                                        <input type="email" class="form-control" asp-for="Email" required>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="PhoneNo"></label>
+                                        <input type="text" class="form-control" asp-for="PhoneNo">
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Account_Type"></label>
+                                        <select class="form-control" asp-for="Account_Type" readonly>
+                                            <option selected>Freelancer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mx-auto mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 Default-Text-Color">Address Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Country"></label>
+                                        <select class="form-control" asp-for="Country">
+                                            <option value="Nepal">Nepal</option>
+                                            <option value="India">India</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="City"></label>
+                                        <input type="text" class="form-control" asp-for="City">
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Post_Code"></label>
+                                        <input type="text" class="form-control" asp-for="Post_Code">
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Address1"></label>
+                                        <input type="text" class="form-control" asp-for="Address1">
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4">
+                                        <label asp-for="Address2"></label>
+                                        <input type="text" class="form-control" asp-for="Address2">
+                                    </div> 
+                                    <div class="col-sm-4 col-md-4 col-lg-4 text-end mt-4">
+                                        <button id="btnUpdateDetails" type="submit" class="btn btn-primary">Update Profile</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 mx-auto mt-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 Default-Text-Color">Education Details  </h5>
+                                <div id="courseCardRowItem"> </div>
+                                <div class="row">
+                                    <div class="Popup-Container" id="popupContainer">
+                                        <div class="Popup-Card" id="popupCard">
+                                            <h4>Add Education</h4>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <label asp-for="Level"></label>
+                                                    <input type="text" class="form-control" asp-for="Level">
+                                                </div>
+                                                <div class="col-sm-12 col-lg-12">
+                                                    <label asp-for="Description"></label>
+                                                    <textarea class="form-control" rows="6" placeholder="Enter your text" asp-for="Description"></textarea>
+                                                </div>
+                                                <div class="col-sm-3 col-lg-3">
+                                                    <label asp-for="JoinDate"></label>
+                                                    <input type="text" class="form-control" asp-for="JoinDate">
+                                                </div>
+                                                <div class="col-sm-3 col-lg-3">
+                                                    <label asp-for="CourseInterval"></label>
+                                                    <input type="number" class="form-control pos" asp-for="CourseInterval">
+                                                </div>
+                                                <div class="col-sm-6 col-lg-6 text-end mt-4">
+                                                    <button type="submit" class="btn btn-primary" id="btnSubmitEducationForm">Add Course</button>
+                                                </div>
+                                            </div>
+                                            <button class="Close-Btn" id="closeBtn">Close</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12 text-end">
+                                        <button id="btnAddEducation" class="btn btn-primary">Add Eduction</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        BindEducationData();
+        BindAllData();
+    });
+    $('#btnSubmitEducationForm').click(function () {
+        $.ajax({
+            url: 'saveCourseDetails',
+            type: 'get',
+            data:
+            {
+                Level: $('#Level').val(),
+                Description: $('#Description').val(),
+                JoinDate: $('#JoinDate').val(),
+                Interval: $('#CourseInterval').val()
+            }
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+
+    function ClearEducationData() {
+        $('#Level').val(""),
+            $('#Description').val(""),
+            $('#JoinDate').val(""),
+            $('#CourseInterval').val("")
+    }
+    function BindEducationData() {
+        $.ajax({
+            url: 'loadCourseDetails',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    var data = response.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $('#courseCardRowItem').append('<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="card-title mb-4 Default-Text-Color">' + data[i].level + ' [' + data[i].joinDate + '][' + data[i].courseInterval + ']</h5>' +
+                            '<p>' + data[i].description + '</p>' +
+                            '</div>' +
+                            '</div>');
+
+                    }
+                }
+                else {
+                    ShowWarning(response.msg);
+                }
+            });
+    }
+    function openPopup() {
+        $('#popupContainer').fadeIn();
+    }
+    function closePopup() {
+        $('#popupContainer').fadeOut();
+    }
+    function BindAllData(){
+        $.ajax({
+            url: 'loadProfileDetails',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    $('#FirstName').val(response.data.firstName);
+                    $('#LastName').val(response.data.lastName);
+                    $('#Email').val(response.data.email);
+                    $('#Username').val(response.data.username);
+                    $('#Country').val(response.data.country);
+                    $('#Account_Type').val(response.data.account_Type);
+                    $('#City').val(response.data.city);
+                    $('#Address1').val(response.data.address1);
+                    $('#Address2').val(response.data.address2);
+                    $('#Post_Code').val(response.data.postCode);
+                    $('#PhoneNo').val(response.data.phoneNo); 
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    }
+
+    $('#btnAddEducation').click(function () {
+        openPopup();
+    });
+    $('#closeBtn').click(function () {
+        closePopup();
+    });
+
+
+    $('#userFullDetails').submit(function (e) {
+
+        if ($('#Password').val() != $('#Confirm_Password').val()) {
+            ShowWarning("Confirm Password Did Not Match");
+        } 
+        else {
+            var randomNumber = Math.floor(Math.random() * 100000 + 1);
+
+            while (randomNumber.length != 5) {
+                randomNumber = Math.floor(Math.random() * 100000 + 1).toString();
+            }
+
+            $('#Token').val(randomNumber);
+            $.ajax({
+                url: 'updateUserDetails',
+                type: 'Post',
+                data: $(this).serialize()
+            })
+                .done(function (data) {
+                })
+                .fail(function (reason) {
+                    ShowError("Server not responding, try later");
+                })
+                .then(function (response) {
+                    if (response.success) {
+                        ShowSuccess(response.msg);
+                        BindAllData();
+                    } else {
+                        ShowWarning(response.msg);
+                    }
+                });
+        }
+        e.preventDefault();
+        return false;
+    });
+
+</script>

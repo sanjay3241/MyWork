@@ -10,5 +10,6 @@ namespace MyWork.Models
          
         [Display(Name = "Code : ")]
         public string Code { get; set; }
+        public string Password { get; set; }
     }
 }

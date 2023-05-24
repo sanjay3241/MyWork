@@ -11,13 +11,17 @@
                 <div class="card-body">
                     <h5 class="card-title Default-Text-Color text-center"> <span>MyWork </span></h5>
                     <div class="row">
-                        <form id="RegisterFreelancer" >
+                        <form id="RegisterFreelancer">
                             @Html.AntiForgeryToken()
 
                             <input type="hidden" asp-for="Token">
                             <div class="col-sm-12 col-lg-12">
-                                <label asp-for="Name"></label>
-                                <input type="text" class="form-control" asp-for="Name" required>
+                                <label asp-for="FirstName"></label>
+                                <input type="text" class="form-control" asp-for="FirstName" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="LastName"></label>
+                                <input type="text" class="form-control" asp-for="LastName" required>
                             </div>
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Email"></label>
@@ -33,16 +37,16 @@
                             </div>
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Country"></label>
-                                <select class="form-control" asp-for="Country"> 
-                                    <option>Nepal</option>
-                                    <option>India</option>
-                                    <option>Other</option>
+                                <select class="form-control" asp-for="Country">
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="India">India</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Account_Type"></label>
                                 <select class="form-control" asp-for="Account_Type" readonly>
-                                    <option selected >Freelancer</option> 
+                                    <option selected>Freelancer</option>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-lg-12 text-center mt-2 Default-Text-Color">
@@ -66,31 +70,81 @@
     });
 
     $('#RegisterFreelancer').submit(function (e) {
-        var randomNumber = Math.floor(Math.random() * 100000 + 1);
 
-        while (randomNumber.length != 5) {
-            randomNumber = Math.floor(Math.random() * 100000 + 1).toString();
-        }
+        if($('#Password').val()!=$('#Confirm_Password').val()){
+             ShowWarning("Confirm Password Did Not Match");
+         }
 
-        $('#Token').val(randomNumber); 
-        $.ajax({
-            url: 'RegisterFreelancer',
-            type: 'Post',
-            data: $(this).serialize()
-        })
-            .done(function (data) {
+         else{
+            var randomNumber = Math.floor(Math.random() * 100000 + 1);
+
+            while (randomNumber.length != 5) {
+                randomNumber = Math.floor(Math.random() * 100000 + 1).toString();
+            }
+
+            $('#Token').val(randomNumber); 
+            $.ajax({
+                url: 'RegisterFreelancer',
+                type: 'Post',
+                data: $(this).serialize()
             })
-            .fail(function (reason) {
-                ShowError("Server not responding, try later");
-            })
-            .then(function (response) {
-                if (response.success) { 
-                    window.location.href = '/Home/VerificationPage?email=' + $('#Email').val();
-                } else {
-                    ShowWarning(response.msg);
+                .done(function (data) {
+                })
+                .fail(function (reason) {
+                    ShowError("Server not responding, try later");
+                })
+                .then(function (response) {
+                    if (response.success) { 
+                        window.location.href = '/Home/VerificationPage?email=' + $('#Email').val();
+                    } else {
+                        ShowWarning(response.msg);
                 }
             });
+        }
         e.preventDefault();
         return false;
     });
+
+
+    $('#FirstName').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#LastName').focus();
+        }
+    })
+    $('#LastName').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#Email').focus();
+        }
+    })
+    $('#Email').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#Password').focus();
+        }
+    })
+    $('#Password').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#Confirm_Password').focus();
+        }
+    })
+    $('#Confirm_Password').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#Country').focus();
+        }
+    })
+    $('#Country').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+            $('#btnSubmit').focus();
+        }
+    })
+    $('#btnSubmit').keypress(function (e) {
+        if (e.which == 13) {
+            e.preventDefault();
+        }
+    })
 </script>

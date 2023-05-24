@@ -51,8 +51,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob05hdkJhckhlYWRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/_SanjayMahato/The British College/4th Year/semester 2/Production Project/Project/MyWork/Views/Shared/_UserNavBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Vc2VyTmF2QmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/_SanjayMahato/The British College/4th Year/semester 2/Production Project/Project/MyWork/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/_SanjayMahato/The British College/4th Year/semester 2/Production Project/Project/MyWork/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/_SanjayMahato/The British College/4th Year/semester 2/Production Project/Project/MyWork/Views/Users/UserProfileDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcVXNlclByb2ZpbGVEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/_SanjayMahato/The British College/4th Year/semester 2/Production Project/Project/MyWork/Views/_ViewImports.cshtml]

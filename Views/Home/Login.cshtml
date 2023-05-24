@@ -1,1 +1,66 @@
-﻿
+﻿@{
+    Layout = "_NoNavBarHeader";
+}
+@using Microsoft.AspNetCore.Http.Extensions;
+@model Verification
+
+<div class="container">
+    <div class="row mt-5 mx-auto">
+        <div class="col-sm-4 col-lg-4">
+        </div>
+        <div class="col-sm-4 col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4 Default-Text-Color">Login</h5>
+                    <div class="row">
+                        <form id="LoginPage">
+                            @Html.AntiForgeryToken()
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Email"> </label>
+                                <input type="text" class="form-control" asp-for="Email" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12">
+                                <label asp-for="Password"> </label>
+                                <input type="text" class="form-control" asp-for="Password" required>
+                            </div>
+                            <div class="col-sm-12 col-lg-12 text-end mt-4">
+                                <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-lg-4">
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#Email').val("smnss3241@gmail.com");
+        $('#Password').val("sanjay");
+    });
+    $('#LoginPage').submit(function (e) {
+        $.ajax({
+            url: 'UserLogin',
+            type: 'Post',
+            data: $(this).serialize()
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg)
+                    window.location.href = '/Users/Index';
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+        e.preventDefault();
+        return false;
+    });
+</script>
