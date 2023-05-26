@@ -1,0 +1,213 @@
+﻿@{
+    Layout = "_navClient";
+}
+
+@model JobDetails
+
+<div class="card-body">
+    <h5 class="card-title mb-4 Default-Text-Color text-center">Showing All The Published Job</h5>
+    <div id="courseCardRowItem"> </div>
+    <div class="row">
+        <div class="Popup-ContainerJob" id="popupContainer">
+            <div class="Popup-CardJob" id="popupCard">
+                <h4>Job Description</h4>
+                <div class="row">
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="FreelancerId" />
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Title"></label>
+                        <input type="text" class="form-control" asp-for="Title" readonly>
+                    </div>
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Description"></label>
+                        <textarea class="form-control" rows="6" placeholder="Description....." asp-for="Description" readonly></textarea>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Interval"></label>
+                        <select class="form-control" asp-for="Interval" disabled>
+                            <option value="Less Than 1 Month">Less Than 1 Month</option>
+                            <option value="Less Than 2 Month">Less Than 2 Month</option>
+                            <option value="Above 3 Month">Above 3 Month</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Budget"></label>
+                        <input type="text" class="form-control pos" asp-for="Budget" readonly>
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <label asp-for="Skill"></label>
+                        <input type="text" class="form-control pos" asp-for="Skill" readonly>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 text-end mt-4">
+                        <button type="button" class="btn btn-primary" id="btnAssign">Assign</button>
+                        <button type="button" class="btn btn-primary" id="btnReject">Reject</button>
+                        <button type="button" class="btn btn-primary" id="openConfirmation">Proceed To Interview</button>
+                    </div>
+                </div>
+                <button class="Close-Btn" id="closeBtn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        BindAllRequestData();
+    });
+
+    $('#btnAssign').click(function (e) {
+        $.ajax({
+            url: 'assignJob',
+            type: 'get',
+            data:
+            {
+                Id: $('#Id').val(),
+                FreelancerId: $('#FreelancerId').val()
+            }
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                    $('#popupContainer').fadeOut();
+                    $('#courseCardRowItem').empty();
+                    BindAllRequestData();
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+
+    $('#btnReject').click(function (e) {
+        $.ajax({
+            url: 'rejectJob',
+            type: 'get',
+            data:
+            {
+                Id: $('#Id').val(),
+                FreelancerId: $('#FreelancerId').val()
+            }
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                    $('#popupContainer').fadeOut();
+                    $('#courseCardRowItem').empty();
+                    BindAllRequestData();
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+
+    $('#courseCardRowItem').click(function () {
+        $('#Id').val($(this).find('#jobid').text());
+        $('#UserId').val($(this).find('#UserId').text());
+        $('#FreelancerId').val($(this).find('#FId').text());
+        $('#Title').val($(this).find('#idTitle').text());
+        $('#Description').val($(this).find('.card-text:eq(1)').text());
+        $('#Budget').val($(this).find('.card-text:eq(2)').text().replace('Assumed Budget/Wages: ', ''));
+        $('#Skill').val($(this).find('.card-text:eq(3)').text().replace('Skill Required: ', ''));
+        $('#popupContainer').fadeIn();
+    });
+
+    $('#closeBtn').click(function () {
+        $('#popupContainer').fadeOut();
+    });
+
+    function BindAllRequestData() {
+        $.ajax({
+            url: 'loadAllRequestedJob',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    var data = response.data;
+                    for (var i = 0; i < data.length; i++) {
+                        $('#courseCardRowItem').append(
+                            '<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="d-none " id="UserId">' + data[i].userId + '</h5>' +
+                            '<h5 class="d-none " id="FId">' + data[i].freelancerId + '</h5>' +
+                            '<h5 class="d-none " id="jobid">' + data[i].id + '</h5>' +
+                            '<h5 class="card-title Default-Text-Color" id="idTitle">' + data[i].title + '</h5>' +
+                            '<p class="card-text mt-0" id="idPostedDate">' + 'Posted On: ' + data[i].postedDate + '</p>' +
+                            '<p class="card-text ps-4" id="idDescription">' + data[i].description + '</p>' +
+                            '<p class="card-text mt-4" id="idBudget">' + 'Assumed Budget/Wages: ' + data[i].budget + '</p>' +
+                            '<p class="card-text" id="idSkill">' + 'Skill Required: ' + data[i].skill + '</p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }
+                }
+                else {
+                    ShowWarning(response.msg);
+                }
+            });
+
+    }
+
+    $('#openConfirmation').click(function () {
+        $('#popupContainer').fadeOut();
+        $('<div></div>').dialog({
+            title: 'Interview Description',
+            dialogClass: 'no-close',
+            modal: true,
+            buttons: {
+                Yes: function () {
+                    var inputValue1 = $('#iDate').val();
+                    var inputValue = $('#iTime').val();
+                    $(this).dialog('close');
+
+                    $.ajax({
+                        url: 'saveInterviewDetails',
+                        type: 'get',
+                        data:
+                        {
+                            Id: $('#Id').val(),
+                            FreelancerId: $('#FreelancerId').val(),
+                            Date: inputValue1,
+                            Time: inputValue
+                        }
+                    })
+                        .done(function (e) {
+                        })
+                        .fail(function (reason) {
+                            ShowError("Server not responding, try later");
+                        })
+                        .then(function (response) {
+                            if (response.success) {
+                                ShowSuccess(response.msg);
+                                $('#courseCardRowItem').empty();
+                                BindAllRequestData();
+                            } else {
+                                ShowWarning(response.msg);
+                            }
+                        });
+                },
+                No: function () {
+                    $(this).dialog('close');
+                }
+            },
+            open: function () {
+                $(this).html('<label>Date</label></br><input type="Date" id="iDate"></br><label>Time</label></br><input type="text" id="iTime">');
+            }
+        });
+    });
+</script>

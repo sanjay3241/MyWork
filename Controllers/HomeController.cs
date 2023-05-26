@@ -5,6 +5,7 @@ using MyWork.Support;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.Reflection;
 using System.Security.Cryptography.Xml;
 
 namespace MyWork.Controllers
@@ -32,6 +33,10 @@ namespace MyWork.Controllers
         {
             return View();
         }
+        public IActionResult ReseatPassword()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,22 +60,23 @@ namespace MyWork.Controllers
                         });
                     }
 
-                    con.Execute(@"INSERT INTO [dbo].[User](FirstName,LastName,Email,Password,Username,Country,Token,Account_Type, IsActive,Registered_Date) 
-Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_Type, @IsActive,@Registered_Date)", new
-                    {
-                        @FirstName = model.FirstName,
-                        @LastName = model.LastName,
-                        @Email = model.Email,
-                        @Password = model.Password,
-                        @Country=model.Country,
-                        @Username = model.FirstName + model.Token,
-                        @Token = model.Token,
-                        @Account_Type = model.Account_Type,
-                        @IsActive = 0,
-                        @Registered_Date = DateTime.Now
-                    });
                     if (CommonFunction.SendMail(model.Email, "Registration Code", model.Token))
                     {
+                        con.Execute(@"INSERT INTO [dbo].[User](FirstName,LastName,Email,Password,Username,Country,Token,Account_Type, IsActive,Registered_Date) 
+Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_Type, @IsActive,@Registered_Date)", new
+                        {
+                            @FirstName = model.FirstName,
+                            @LastName = model.LastName,
+                            @Email = model.Email,
+                            @Password = model.Password,
+                            @Country = model.Country,
+                            @Username = model.FirstName + model.Token,
+                            @Token = model.Token,
+                            @Account_Type = model.Account_Type,
+                            @IsActive = 0,
+                            @Registered_Date = DateTime.Now
+                        });
+
                         return Json(new
                         {
                             msg = "Email Sent Successfully",
@@ -85,6 +91,83 @@ Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_
                             success = false
                         });
                     }
+                }
+                catch (Exception Ex)
+                {
+                    return Json(new
+                    {
+                        msg = Ex.Message,
+                        success = false
+                    });
+                };
+            }
+        }
+
+        public IActionResult ForgotPassword(string email)
+        {
+            using (IDbConnection con = new SqlConnection(connectionString))
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                try
+                {
+                    Random random = new Random();
+                    int randomNumber = random.Next(10000, 100000);
+                    string randomNumberString = randomNumber.ToString();
+
+                    while (randomNumberString.Length != 5)
+                    {
+                        randomNumber = random.Next(10000, 100000);
+                        randomNumberString = randomNumber.ToString();
+
+                    }
+                    if (CommonFunction.SendMail(email, "Registration Code", randomNumberString))
+                    {
+                        con.Execute(@"Update [dbo].[User] Set Token=@Token, IsActive=@IsActive Where Email=@Email", new
+                        {
+                            @Email = email,
+                            @Token = randomNumberString,
+                            @IsActive = 0,
+                        });
+                    }
+                    return Json(new
+                    {
+                        msg = "Email Sent Successfully",
+                        success = true
+                    });
+                }
+                catch (Exception Ex)
+                {
+                    return Json(new
+                    {
+                        msg = Ex.Message,
+                        success = false
+                    });
+                };
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult reseatPassword(Verification model)
+        {
+            using (IDbConnection con = new SqlConnection(connectionString))
+            {
+                if (con.State == ConnectionState.Closed)
+                    con.Open();
+                try
+                { 
+                    con.Execute(@"Update [dbo].[User] Set Password=@Password Where Email=@Email", new
+                    {
+                        @Email = model.Email,
+                        @Password = model.Password
+                    });
+
+                    return Json(new
+                    {
+                        msg = "Password Reseat Successfully",
+                        success = true
+                    });
                 }
                 catch (Exception Ex)
                 {
@@ -182,6 +265,7 @@ Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_
                                 return Json(new
                                 {
                                     msg = "Logged In Successfully !",
+                                    data = userDetails.Account_Type,
                                     success = true
                                 });
                             }
@@ -202,7 +286,7 @@ Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_
                                 success = false
                             });
                         }
-                    } 
+                    }
                 }
                 catch (Exception Ex)
                 {
@@ -222,6 +306,7 @@ Values(@FirstName,@LastName,@Email,@Password,@Username,@Country,@Token,@Account_
         }
 
 
+        [SessionCheck]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult updateUserDetails(Login model)

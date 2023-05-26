@@ -11,7 +11,7 @@ namespace MyWork.Support
             if (context.HttpContext.Session == null || context.HttpContext.Session.GetString("Email") == null)
             {
                 // Session is not active, redirect to a different page or perform any desired action
-                context.Result = new RedirectResult("/Home/Login"); // Example: Redirect to the login page
+                context.Result = new RedirectResult("/Home/Register"); // Example: Redirect to the login page
             }
 
             base.OnActionExecuting(context);

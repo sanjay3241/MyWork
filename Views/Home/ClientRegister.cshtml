@@ -11,14 +11,18 @@
                 <div class="card-body">
                     <h5 class="card-title Default-Text-Color text-center"> <span>MyWork </span></h5>
                     <div class="row">
-                        <form>
+                        <form id="RegistereClient">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" asp-for="Token">
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="FirstName"></label>
                                 <input type="text" class="form-control" asp-for="FirstName" required>
                             </div>
                             <div class="col-sm-12 col-lg-12">
-                                <label asp-for="FirstName"></label>
-                                <input type="text" class="form-control" asp-for="FirstName" required>
+                                <label asp-for="LastName"></label>
+                                <input type="text" class="form-control" asp-for="LastName" required>
                             </div>
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Email"></label>
@@ -34,17 +38,21 @@
                             </div>
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Country"></label>
-                                <select class="form-control" asp-for="Country"> </select>
+                                <select class="form-control" asp-for="Country">
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="India">India</option>
+                                    <option value="Other">Other</option>
+                                </select>
                             </div>
-                            <div class="col-sm-12 col-lg-12 text-center mt-2 Default-Text-Color">
-                                <input type="checkbox" class="form-check-input" required>
-                                <label class="form-check-label">I agree to the term and condition of MyWork</label>
-                            </div> 
                             <div class="col-sm-12 col-lg-12">
                                 <label asp-for="Account_Type"></label>
                                 <select class="form-control" asp-for="Account_Type" readonly>
                                     <option selected>Client</option>
                                 </select>
+                            </div>
+                            <div class="col-sm-12 col-lg-12 text-center mt-2 Default-Text-Color">
+                                <input type="checkbox" class="form-check-input" required>
+                                <label class="form-check-label">I agree to the term and condition of MyWork</label>
                             </div>
                             <div class="col-sm-12 col-lg-12 text-end">
                                 <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
@@ -62,8 +70,40 @@
     $(document).ready(function () {
     });
 
-    $("#btnSubmit").click(function (e) {
-        $("#btnSubmit").text("Okay");
+
+    $('#RegistereClient').submit(function (e) {
+
+        if ($('#Password').val() != $('#Confirm_Password').val()) {
+            ShowWarning("Confirm Password Did Not Match");
+        }
+
+        else {
+            var randomNumber = Math.floor(Math.random() * 100000 + 1);
+
+            while (randomNumber.length != 5) {
+                randomNumber = Math.floor(Math.random() * 100000 + 1).toString();
+            }
+
+            $('#Token').val(randomNumber);
+            $.ajax({
+                url: 'RegisterFreelancer',
+                type: 'Post',
+                data: $(this).serialize()
+            })
+                .done(function (data) {
+                })
+                .fail(function (reason) {
+                    ShowError("Server not responding, try later");
+                })
+                .then(function (response) {
+                    if (response.success) {
+                        window.location.href = '/Home/VerificationPage?email=' + $('#Email').val();
+                    } else {
+                        ShowWarning(response.msg);
+                    }
+                });
+        }
         e.preventDefault();
-    })
+        return false;
+    });
 </script>

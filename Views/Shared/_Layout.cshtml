@@ -18,12 +18,55 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="Default-Text-Color">MyWork</span></a>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1 justify-content-end"> 
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Find Work
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                                <a class="dropdown-item" data-value="Find Job" asp-controller="Freelancer" asp-action="FindJob">Find Job</a>
+                                <a class="dropdown-item" data-value="All Job" asp-controller="Freelancer" asp-action="MyJob">My Job</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown mx-4">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Job
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <a class="dropdown-item" asp-controller="Client" asp-action="PostJob" data-value="Post Job"> Post Job</a>
+                                <a class="dropdown-item" data-value="All Job" asp-controller="Client" asp-action="AllJob">All Job</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Freelancer
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                                <a class="dropdown-item" asp-controller="Client" asp-action="TalentList" data-value="Find Talent"> Find Talent</a>
+                                <a class="dropdown-item" data-value="Talent Request" asp-controller="Client" asp-action="TalentRequest">Talent Request</a>
+                            </div>
+                        </li>
+                    </ul> 
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item mx-4">
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                    <div class="input-group-append col-sm-12 col-lg-4">
+                                        <select class="form-control" id="findType">
+                                            <option>Talent</option>
+                                            <option>Job</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark Default-Bg-Color Circle-Button ps-4 pe-4 " asp-controller="Home" asp-action="Register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark Default-Bg-Color Circle-Button ps-4 pe-4" asp-controller="Home" asp-action="Login">LogIn</a>       
+                            <a class="nav-link text-dark Default-Bg-Color Circle-Button ps-4 pe-4" asp-controller="Home" asp-action="Login">LogIn</a>
                         </li>
                     </ul>
                 </div>

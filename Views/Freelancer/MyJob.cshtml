@@ -1,0 +1,214 @@
+﻿@{
+    Layout = "_navFreelancer";
+}
+
+@model JobDetails
+
+<div class="card-body">
+    <div class="row text-center d-flex justify-content-center Default-Text-Color fw-bold Logout-Curcor">
+        <div class="col-sm-2 col-md-2" id="dvApplied">Applied</div>
+        <div class="col-sm-2 col-md-2" id="dvAssigned">Assigned</div>
+    </div>
+    <div id="courseCardRowItem"> </div>
+    <div class="row">
+        <div class="Popup-ContainerJob" id="popupContainer">
+            <div class="Popup-CardJob" id="popupCard">
+                <h4>Job Description</h4>
+                <div class="row">
+
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="UserId" />
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Title"></label>
+                        <input type="text" class="form-control" asp-for="Title" readonly>
+                    </div>
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Description"></label>
+                        <textarea class="form-control" rows="6" placeholder="Description....." asp-for="Description" readonly></textarea>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Interval"></label>
+                        <select class="form-control" asp-for="Interval" disabled>
+                            <option value="Less Than 1 Month">Less Than 1 Month</option>
+                            <option value="Less Than 2 Month">Less Than 2 Month</option>
+                            <option value="Above 3 Month">Above 3 Month</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Budget"></label>
+                        <input type="text" class="form-control pos" asp-for="Budget" readonly>
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <label asp-for="Skill"></label>
+                        <input type="text" class="form-control pos" asp-for="Skill" readonly>
+                    </div>
+                    <div class="col-sm-12 col-lg-12 text-end mt-4">
+                        <button type="button" class="btn btn-primary" id="btnApply">Apply</button>
+                    </div>
+                </div>
+                <button class="Close-Btn" id="closeBtn">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        BindAppliedJobData();
+    });
+
+    $('#btnApply').click(function (e) {
+        $.ajax({
+            url: 'applyJob',
+            type: 'get',
+            data:
+            {
+                Id: $('#Id').val(),
+                UserId: $('#UserId').val()
+            }
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                    $('#popupContainer').fadeOut();
+                    $('#courseCardRowItem').empty();
+                    BindAllJobData();
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+
+    $('#courseCardRowItem').click(function () {
+        $('#Id').val($(this).find('#jobid').text());
+        $('#UserId').val($(this).find('#UserId').text());
+        $('#Title').val($(this).find('#idTitle').text());
+        $('#Description').val($(this).find('.card-text:eq(1)').text());
+        $('#Budget').val($(this).find('.card-text:eq(2)').text().replace('Assumed Budget/Wages: ', ''));
+        $('#Skill').val($(this).find('.card-text:eq(3)').text().replace('Skill Required: ', ''));
+        $('#popupContainer').fadeIn();
+    });
+
+    $('#closeBtn').click(function () {
+        $('#popupContainer').fadeOut();
+    });
+
+    $('#dvApplied').click(function (e) {
+        $('#courseCardRowItem').empty();
+        BindAppliedJobData();
+    });
+    $('#dvAssigned').click(function (e) {
+        $('#courseCardRowItem').empty();
+        BindAsignedJobData();
+    });
+
+    function BindAsignedJobData() {
+        $.ajax({
+            url: 'loadAssignedJob',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    var data = response.data;
+
+                    if(data.length<1){
+                        $('#courseCardRowItem').append(
+                            '<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="d-none " id="UserId"></h5>' +
+                            '<h5 class="d-none " id="jobid"></h5>' +
+                            '<h5 class="card-title Default-Text-Color" id="idTitle"></h5>' +
+                            '<p class="card-text mt-0" id="idPostedDate">' +
+                            '<p class="card-text ps-4" id="idDescription">No Job Assigned Yet</p>' +
+                            '<p class="card-text mt-4" id="idBudget"></p>' +
+                            '<p class="card-text" id="idSkill"></p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        $('#courseCardRowItem').append(
+                            '<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="d-none " id="UserId">' + data[i].userId + '</h5>' +
+                            '<h5 class="d-none " id="jobid">' + data[i].id + '</h5>' +
+                            '<h5 class="card-title Default-Text-Color" id="idTitle">' + data[i].title + '</h5>' +
+                            '<p class="card-text mt-0" id="idPostedDate">' + 'Posted On: ' + data[i].postedDate + '</p>' +
+                            '<p class="card-text ps-4" id="idDescription">' + data[i].description + '</p>' +
+                            '<p class="card-text mt-4" id="idBudget">' + 'Assumed Budget/Wages: ' + data[i].budget + '</p>' +
+                            '<p class="card-text" id="idSkill">' + 'Skill Required: ' + data[i].skill + '</p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }
+                    $('#dvAssigned').empty();
+                    $('#dvAssigned').append('Assigned ('+data.length+')')
+                }
+                else {
+                    ShowWarning(response.msg);
+                }
+            });
+    };
+    function BindAppliedJobData() {
+        $.ajax({
+            url: 'loadAppliedJob',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    var data = response.data;
+                    if (data.length < 1) {
+                        $('#courseCardRowItem').append(
+                            '<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="d-none " id="UserId"></h5>' +
+                            '<h5 class="d-none " id="jobid"></h5>' +
+                            '<h5 class="card-title Default-Text-Color" id="idTitle"></h5>' +
+                            '<p class="card-text mt-0" id="idPostedDate">' +
+                            '<p class="card-text ps-4" id="idDescription">No Job Applied Yet</p>' +
+                            '<p class="card-text mt-4" id="idBudget"></p>' +
+                            '<p class="card-text" id="idSkill"></p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    }
+                    for (var i = 0; i < data.length; i++) {
+                        $('#courseCardRowItem').append(
+                            '<div class="card my-4">' +
+                            '<div class="card-body">' +
+                            '<h5 class="d-none " id="UserId">' + data[i].userId + '</h5>' +
+                            '<h5 class="d-none " id="jobid">' + data[i].id + '</h5>' +
+                            '<h5 class="card-title Default-Text-Color" id="idTitle">' + data[i].title + '</h5>' +
+                            '<p class="card-text mt-0" id="idPostedDate">' + 'Posted On: ' + data[i].postedDate + '</p>' +
+                            '<p class="card-text ps-4" id="idDescription">' + data[i].description + '</p>' +
+                            '<p class="card-text mt-4" id="idBudget">' + 'Assumed Budget/Wages: ' + data[i].budget + '</p>' +
+                            '<p class="card-text" id="idSkill">' + 'Skill Required: ' + data[i].skill + '</p>' +
+                            '</div>' +
+                            '</div>'
+                        );
+                    } 
+                    $('#dvApplied').empty();
+                    $('#dvApplied').append('Applied (' + data.length + ')')
+                }
+                else {
+                    ShowWarning(response.msg);
+                }
+            });
+
+    };
+</script>

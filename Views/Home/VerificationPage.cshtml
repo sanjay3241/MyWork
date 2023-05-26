@@ -20,6 +20,11 @@
                                 @if (Context.Request.Query.TryGetValue("email", out var email))
                                 {
                                     <input type="text" class="form-control" asp-for="Email" value="@email" readonly>
+                                    <input type="hidden" tranId="">
+                                }
+                                @if (Context.Request.Query.TryGetValue("tranType", out var tranType))
+                                {
+                                    <input type="hidden" tranId="@tranType">
                                 }
                             </div>
                             <div class="col-sm-12 col-lg-12">
@@ -56,8 +61,11 @@
             })
             .then(function (response) {
                 if (response.success) {
-                    window.location.href = '/Home/Login';
-                } else {
+                    if ($('#tranId').val() == 'ReseatPassword')
+                        window.location.href = '/Home/ReseatPassword?email=' + $('#Email').val();
+                    else
+                        window.location.href = '/Home/Login';
+                    } else {
                     ShowWarning(response.msg);
                 }
             });

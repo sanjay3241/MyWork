@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MMFO6cS7Tazw+biGabLMF034s+IqYrjM1nzz7vZ/wjU=",
+  "Hash": "EWhZ4JGyfvvTBcIgUUnZ5DOrSQrN3ieTX0slVbGcYi8=",
   "Source": "MyWork",
   "BasePath": "_content/MyWork",
   "Mode": "Default",
@@ -68,6 +68,23 @@
       "OriginalItemSpec": "wwwroot\\css\\CustomCss.css"
     },
     {
+      "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\css\\jquery-ui.css",
+      "SourceId": "MyWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\",
+      "BasePath": "_content/MyWork",
+      "RelativePath": "css/jquery-ui.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\jquery-ui.css"
+    },
+    {
       "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\css\\site.css",
       "SourceId": "MyWork",
       "SourceType": "Discovered",
@@ -102,6 +119,23 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\Images\\people-g0c937bc6a_1280.jpg",
+      "SourceId": "MyWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\",
+      "BasePath": "_content/MyWork",
+      "RelativePath": "Images/people-g0c937bc6a_1280.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\people-g0c937bc6a_1280.jpg"
+    },
+    {
       "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\Images\\profile-image.jpg",
       "SourceId": "MyWork",
       "SourceType": "Discovered",
@@ -117,6 +151,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\profile-image.jpg"
+    },
+    {
+      "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\Images\\stickies-g325809f7e_1280.jpg",
+      "SourceId": "MyWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\",
+      "BasePath": "_content/MyWork",
+      "RelativePath": "Images/stickies-g325809f7e_1280.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\stickies-g325809f7e_1280.jpg"
+    },
+    {
+      "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\Images\\stock-photo-freelance-part-time-outsources-job-employment-concept-300532442.jpg",
+      "SourceId": "MyWork",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\",
+      "BasePath": "_content/MyWork",
+      "RelativePath": "Images/stock-photo-freelance-part-time-outsources-job-employment-concept-300532442.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\stock-photo-freelance-part-time-outsources-job-employment-concept-300532442.jpg"
     },
     {
       "Identity": "D:\\_SanjayMahato\\The British College\\4th Year\\semester 2\\Production Project\\Project\\MyWork\\wwwroot\\js\\site.js",

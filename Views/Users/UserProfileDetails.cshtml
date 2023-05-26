@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row mt-4 mx-auto h-auto">
-        <div class="col-sm-10 col-lg-10 mx-auto mt-4"> 
+        <div class="col-sm-10 col-lg-10 mx-auto mt-4">
             <form id="userFullDetails">
 
 
@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="col-sm-4 col-lg-4">
                                         <label asp-for="Username"></label>
-                                        <input type="text" class="form-control" asp-for="Username" required>
+                                        <input type="text" class="form-control" asp-for="Username" readonly>
                                     </div>
                                     <div class="col-sm-4 col-lg-4">
                                         <label asp-for="Email"></label>
@@ -47,9 +47,18 @@
                                     </div>
                                     <div class="col-sm-4 col-lg-4">
                                         <label asp-for="Account_Type"></label>
-                                        <select class="form-control" asp-for="Account_Type" readonly>
-                                            <option selected>Freelancer</option>
+                                        <input type="text" class="form-control" asp-for="Account_Type" readonly>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4" id="dvRecomendation">
+                                        <label asp-for="Recomendation"></label>
+                                        <select class="form-control" asp-for="Recomendation">
+                                            <option value="On">On</option>
+                                            <option value="Off">Off</option>
                                         </select>
+                                    </div>
+                                    <div class="col-sm-4 col-lg-4" id="dvRecomendationDesc">
+                                        <label asp-for="RecomendationDesc"></label>
+                                        <input type="text" class="form-control" asp-for="RecomendationDesc">
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +92,7 @@
                                     <div class="col-sm-4 col-lg-4">
                                         <label asp-for="Address2"></label>
                                         <input type="text" class="form-control" asp-for="Address2">
-                                    </div> 
+                                    </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4 text-end mt-4">
                                         <button id="btnUpdateDetails" type="submit" class="btn btn-primary">Update Profile</button>
                                     </div>
@@ -91,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-12 mx-auto mt-4">
+                    <div class="col-sm-12 col-lg-12 mx-auto mt-4" id="dvEducation">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-4 Default-Text-Color">Education Details  </h5>
@@ -139,40 +148,15 @@
 
 <script>
     $(document).ready(function () {
-        BindEducationData();
         BindAllData();
-    });
-    $('#btnSubmitEducationForm').click(function () {
-        $.ajax({
-            url: 'saveCourseDetails',
-            type: 'get',
-            data:
-            {
-                Level: $('#Level').val(),
-                Description: $('#Description').val(),
-                JoinDate: $('#JoinDate').val(),
-                Interval: $('#CourseInterval').val()
-            }
-        })
-            .done(function (e) {
-            })
-            .fail(function (reason) {
-                ShowError("Server not responding, try later");
-            })
-            .then(function (response) {
-                if (response.success) {
-                    ShowSuccess(response.msg);
-                } else {
-                    ShowWarning(response.msg);
-                }
-            });
+        BindEducationData();
     });
 
     function ClearEducationData() {
-        $('#Level').val(""),
-            $('#Description').val(""),
-            $('#JoinDate').val(""),
-            $('#CourseInterval').val("")
+        $('#Level').val("");
+        $('#Description').val("");
+        $('#JoinDate').val("");
+        $('#CourseInterval').val("");
     }
     function BindEducationData() {
         $.ajax({
@@ -208,7 +192,7 @@
     function closePopup() {
         $('#popupContainer').fadeOut();
     }
-    function BindAllData(){
+    function BindAllData() {
         $.ajax({
             url: 'loadProfileDetails',
             type: 'get',
@@ -230,9 +214,24 @@
                     $('#Address1').val(response.data.address1);
                     $('#Address2').val(response.data.address2);
                     $('#Post_Code').val(response.data.postCode);
-                    $('#PhoneNo').val(response.data.phoneNo); 
-                } else {
-                    ShowWarning(response.msg);
+                    $('#PhoneNo').val(response.data.phoneNo);
+                    $('#Recomendation').val(response.data.recomendation);
+                    $('#RecomendationDesc').val(response.data.recomendationDesc);
+
+                    if (response.data.account_Type == "Client"){
+                        $('#dvEducation').hide();
+                        $('#dvRecomendation').hide();
+                        $('#dvRecomendationDesc').hide();
+                    }
+                    else{
+                        $('#dvEducation').show();
+                        $('#dvRecomendationDesc').show();
+                        $('#dvRecomendation').show();
+                    }
+                         
+                }
+                else {
+                    ShowError(response.msg);
                 }
             });
     }
@@ -243,13 +242,42 @@
     $('#closeBtn').click(function () {
         closePopup();
     });
-
-
+    $('#btnSubmitEducationForm').click(function () {
+        $.ajax({
+            url: 'saveCourseDetails',
+            type: 'get',
+            data:
+            {
+                Level: $('#Level').val(),
+                Description: $('#Description').val(),
+                JoinDate: $('#JoinDate').val(),
+                Interval: $('#CourseInterval').val()
+            }
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+    $('#Recomendation').change(function (e) {
+        if ($('#Recomendation').val() == "On")
+            $('#RecomendationDesc').attr("readonly", false);
+        else
+            $('#RecomendationDesc').attr("readonly", true)
+    });
     $('#userFullDetails').submit(function (e) {
 
         if ($('#Password').val() != $('#Confirm_Password').val()) {
             ShowWarning("Confirm Password Did Not Match");
-        } 
+        }
         else {
             var randomNumber = Math.floor(Math.random() * 100000 + 1);
 

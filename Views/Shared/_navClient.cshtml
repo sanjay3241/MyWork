@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyWork</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/CustomCss.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyWork.styles.css" asp-append-version="true" />
+    <script src="~/js/Jquery.js"></script>
+    <script src="~/lib/jquery-toastr/JavaScript.js"></script>
+    <link rel=" stylesheet" href="~/lib/jquery-toastr/StyleSheet.css" />
+    <script src="~/js/Toaster.js"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar-height">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 h-100">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index"><span class="Default-Text-Color">MyWork</span></a>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1 ms-5">
+                            <li class="nav-item dropdown mx-4">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Job
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#" data-value="Post Job">
+                                        <a class="navbar-brand" asp-controller="Client" asp-action="PostJob">Post Job</a>
+                                    </a>
+                                    <a class="dropdown-item" href="#" data-value="All Job">
+                                        <a class="navbar-brand" asp-controller="Client" asp-action="AllJob">All Job</a>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Freelancer
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#" data-value="Find Talent">
+                                        <a class="navbar-brand" asp-controller="Client" asp-action="TalentList">Find Talent</a>
+                                    </a>
+                                    <a class="dropdown-item" href="#" data-value="Talent Request">
+                                        <a class="navbar-brand" asp-controller="Client" asp-action="TalentRequest">Talent Request</a>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav flex-grow-1 justify-content-end">
+                            <li class="nav-item mx-4">
+                                <form class="navbar-form" role="search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search">
+                                        <div class="input-group-append col-sm-12 col-lg-4">
+                                            <select class="form-control" id="findType">
+                                                <option>Talent</option>
+                                                <option>Job</option>
+                                                <option>Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="nav-item mx-2">
+                                <div class="message-button" id="messageButton">
+                                    <span class="fa-stack fa-sm">
+                                        <a asp-controller="Client" asp-action="Message">
+                                            <i class="fas fa-envelope fa-stack-2x Default-Text-Color"></i>
+                                        </a>
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="nav-item mx-3">
+                                <div class="notification-button" id="notificationButton">
+                                    <span class="fa-stack fa-sm">
+                                        <a asp-controller="Client" asp-action="Notification"> 
+                                            <i class="fas fa-bell fa-stack-2x Default-Text-Color"></i>
+                                        </a> 
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <div class="profile-container">
+                                    <img src="/images/profile-image.jpg" class="rounded-circle" alt="Profile Picture" id="profileImg">
+                                    <div class="popup-container px-5" id="popupContainer1">
+                                        <div class="popup-card">
+                                            <div class="row align-content-center">
+                                                <a class="navbar-brand" asp-controller="Users" asp-action="UserProfileDetails"><span class="Default-Text-Color">View Profile</span></a>
+                                                <span class="Default-Text-Color text-danger text-center Logout-Curcor" id="btnLogout"><b>Logout</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('#profileImg').hover(function () {
+            $('#popupContainer1').fadeIn();
+        });
+        $('#popupContainer1').mouseleave(function () {
+            $('#popupContainer1').fadeOut();
+        });
+    });
+
+
+    $('#btnViewProfile').click(function (e) {
+        window.location.href = '/Users/UserProfileDetails';
+        e.preventDefault();
+        return false;
+    });
+
+    $('#btnLogout').click(function (e) {
+        $.ajax({
+            url: '../Users/userLogout',
+            type: 'get',
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    window.location.href = '/Home/Index';
+                    ShowSuccess(response.msg);
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+    });
+
+    $('.dropdown-item').click(function (e) {
+        e.preventDefault();
+        var selectedOption = $(this).data('value');
+        $('.nav-link.dropdown-toggle').text(selectedOption);
+    });
+
+</script>

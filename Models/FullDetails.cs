@@ -30,7 +30,7 @@ namespace MyWork.Models
         public string Country { get; set; }
 
         [Required]
-        [Display(Name = "Account_Type : ")]
+        [Display(Name = "Account Type : ")]
         public string Account_Type { get; set; }
 
         [Display(Name = "Contact No: ")]
@@ -48,8 +48,10 @@ namespace MyWork.Models
         [Display(Name = "Address2 : ")]
         public string Address2 { get; set; }
 
-        [Display(Name = "Recomendation Desc : ")]
-        public string RecomendatiDesc { get; set; }
+        [Display(Name = "Skill [Seperate By Space] : ")]
+        public string RecomendationDesc { get; set; }
+
+        [Display(Name = "Recomendation: ")]
         public string Recomendation { get; set; }
         public string Token { get; set; }
         public string IsActive { get; set; }
@@ -67,5 +69,14 @@ namespace MyWork.Models
          
         [Display(Name = "Course Interval : ")]
         public string CourseInterval { get; set; } 
+    }
+
+    public class RecomendDetails
+    { 
+        public int FreelancerId { get; set; }
+        public string ClientName { get; set; }
+        public int JobId { get; set; }
+        public string Title { get; set; }
+        public string Skill { get; set; }
     }
 }

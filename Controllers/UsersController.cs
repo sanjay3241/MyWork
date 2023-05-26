@@ -170,7 +170,7 @@ Values(@UserId,@Level,@Description,@JoinDate,@CourseInterval)", new
                 try
                 {
                     con.Execute(@"Update [dbo].[User] Set FirstName=@FirstName,LastName=@LastName,Email=@Email,
-Country=@Country,City=@City,Address1=@Address1,Address2=@Address2,PostCode=@PostCode,PhoneNo=@PhoneNo Where Id=@Id", new
+Country=@Country,City=@City,Address1=@Address1,Address2=@Address2,PostCode=@PostCode,PhoneNo=@PhoneNo,Recomendation=@Recomendation,RecomendationDesc=@RecomendationDesc Where Id=@Id", new
                     {
                         @Id = HttpContext.Session.GetInt32("Id"),
                         @FirstName = model.FirstName,
@@ -181,7 +181,9 @@ Country=@Country,City=@City,Address1=@Address1,Address2=@Address2,PostCode=@Post
                         @Address1 = model.Address1,
                         @Address2 = model.Address2,
                         @PostCode = model.Post_Code,
-                        @PhoneNo = model.PhoneNo
+                        @PhoneNo = model.PhoneNo,
+                        @Recomendation= model.Recomendation,
+                        @RecomendationDesc=model.RecomendationDesc
                     });
                 }
                 catch (Exception Ex)

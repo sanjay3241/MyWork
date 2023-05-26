@@ -19,7 +19,7 @@ namespace MyWork.Models
         public string PostCode { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
-        public string RecomendatiDesc { get; set; }
+        public string RecomendationDesc { get; set; }
         public string Recomendation { get; set; }
         public string Token { get; set; }
         public string IsActive { get; set; }

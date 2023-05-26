@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "_navClient";
+}
+@model JobDetails
+
+
+<div class="col-sm-10 col-lg-10 mx-auto mt-4">
+    <h1 class="Default-Text-Color text-center m-5">Write a descrption for your job post</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-4 Default-Text-Color">Job Details</h5>
+            <form id="frmPostJob">
+                 
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Title"></label>
+                        <input type="text" class="form-control" asp-for="Title">
+                    </div>
+                    <div class="col-sm-12 col-lg-12">
+                        <label asp-for="Description"></label>
+                        <textarea class="form-control" rows="6" placeholder="Description....." asp-for="Description"></textarea>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Interval"></label>
+                        <select class="form-control" asp-for="Interval">
+                            <option value="Less Than 1 Month">Less Than 1 Month</option>
+                            <option value="Less Than 2 Month">Less Than 2 Month</option>
+                            <option value="Above 3 Month">Above 3 Month</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 col-lg-3">
+                        <label asp-for="Budget"></label>
+                        <input type="text" class="form-control pos" asp-for="Budget">
+                    </div>
+                    <div class="col-sm-4 col-lg-4">
+                        <label asp-for="Skill"></label>
+                        <input type="text" class="form-control pos" asp-for="Skill">
+                    </div>
+                    <div class="col-sm-2 col-lg-2 text-end mt-4">
+                        <button type="submit" class="btn btn-primary" id="PostJob">Post Job</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+    });
+
+    $('#frmPostJob').submit(function (e) {
+        $.ajax({
+            url: 'saveJobDetails',
+            type: 'Post',
+            data: $(this).serialize()
+        })
+            .done(function (e) {
+            })
+            .fail(function (reason) {
+                ShowError("Server not responding, try later");
+            })
+            .then(function (response) {
+                if (response.success) {
+                    ShowSuccess(response.msg);
+                    window.location.href ='/Client/AllJob';
+                } else {
+                    ShowWarning(response.msg);
+                }
+            });
+
+        e.preventDefault();
+        return false;
+    });
+</script>
